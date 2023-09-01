@@ -7,6 +7,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.mail.Multipart;
 import javax.mail.internet.MimeMessage;
 
 @Service
@@ -17,11 +18,11 @@ public class EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendMail( String to,  String subject, String body) {
+    public void sendMail(Multipart file, String to, String subject, String body) {
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false);
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, file != null);
 
             mimeMessageHelper.setFrom(fromEmail);
             mimeMessageHelper.setTo(to);

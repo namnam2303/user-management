@@ -7,6 +7,7 @@ import com.supportportal.exception.ExceptionHandling;
 import com.supportportal.exception.domain.*;
 import com.supportportal.service.UserService;
 import com.supportportal.utility.JWTTokenProvider;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -54,6 +55,7 @@ public class UserController extends ExceptionHandling {
         User loginUser = userService.findUserByUsername(user.getUsername());
         UserPrincipal userPrincipal = new UserPrincipal(loginUser);
         HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
+        LoggerFactory.getLogger(getClass()).info(jwtHeader.getFirst(JWT_TOKEN_HEADER));
         return new ResponseEntity<>(loginUser, jwtHeader, OK);
     }
 

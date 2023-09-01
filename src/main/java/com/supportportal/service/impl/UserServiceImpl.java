@@ -1,5 +1,6 @@
 package com.supportportal.service.impl;
 
+import com.supportportal.constant.EmailConstant;
 import com.supportportal.domain.User;
 import com.supportportal.domain.UserPrincipal;
 import com.supportportal.enumeration.Role;
@@ -14,7 +15,6 @@ import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -95,7 +95,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setProfileImageUrl(getTemporaryProfileImageUrl(username));
         userRepository.save(user);
         LOGGER.info("New user password: " + password);
-        emailService.sendMail(email,"Your account password", "Hi " + username + "! \nHere is your password :" +  password);
+        String emailBody = EmailConstant.REGISTER_TEMPLATE.replace("${userName}", user.getFirstName())
+                .replace("${name}", user.getFirstName())
+                .replace("${username}", username).replace("${initialPassword}", password)
+                .replace("${supportEmail}", "imsofh@gmail.com")
+                .replace("${supportPhoneNumber}", "+84393459356")
+                .replace("${companyName}", "Nam!");
+        emailService.sendMail(null,user.getEmail(), "Welcome to my website!", emailBody);
 
         return user;
     }
@@ -120,7 +126,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.save(user);
         saveProfileImage(user, profileImage);
         LOGGER.info("New user password: " + password);
-        emailService.sendMail(email,"Your account password", "Hi " + username + "! \n Here is your password :" +  password);
+        emailService.sendMail(null , email,"Your account password", "Hi " + username + "! \n Here is your password :" +  password);
         return user;
     }
 
@@ -150,7 +156,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setPassword(encodePassword(password));
         userRepository.save(user);
         LOGGER.info("New user password: " + password);
-        //emailService.sendEmail(user.getFirstName(), password, user.getEmail());
+        String emailBody = EmailConstant.RESET_PASSWORD_TEMPLATE.replace("${userName}", user.getFirstName())
+                        .replace("${userName}", user.getFirstName())
+                                .replace("${changeDate}", new Date().toString())
+                .replace("${supportEmail}", "imsofh@gmail.com")
+                .replace("${supportPhoneNumber}", "+84393459356")
+                .replace("${companyName}", "Nam!");
+        emailService.sendMail(null,user.getEmail(), "Password Notification", emailBody);
     }
 
     @Override
