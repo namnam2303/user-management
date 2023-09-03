@@ -34,16 +34,16 @@ Before you start, ensure you have the following:
 
 - Java Development Kit (JDK)
 - Spring Boot
-- Database (e.g., MySQL)
-- Node.js and npm (for frontend, if applicable)
+- Database (MySQL)
+- Node.js and npm (for frontend with Angular)
 
 ## Getting Started
 
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
-   cd user-management-backend
+   git clone https://github.com/namnam2303/user-management.git
+   cd user-management
 2. Configure your database settings in application.properties or application.yml.
 
 3.Build and run the application:
@@ -59,8 +59,7 @@ Use the defined API endpoints for user authentication, authorization,  and CRUD 
 JWT tokens are required for secure access to protected endpoints.
 Ensure that appropriate authorities are assigned to users to control access.
 Implement the frontend by Angular to interact with these backend endpoints.
-Exception Handling
-The project includes exception handling for various scenarios, including:
+Exception Handling: the project includes exception handling for various scenarios, including:
 
 User not found
 Username already exists
