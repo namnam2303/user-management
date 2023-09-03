@@ -49,7 +49,6 @@ Before you start, ensure you have the following:
 3.Build and run the application:
 
   ```bash
-  Copy code
   mvn spring-boot:run
 ```
 Your Spring Boot backend should now be running.
