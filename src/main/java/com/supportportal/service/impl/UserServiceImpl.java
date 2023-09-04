@@ -126,7 +126,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.save(user);
         saveProfileImage(user, profileImage);
         LOGGER.info("New user password: " + password);
-        emailService.sendMail(null , email,"Your account password", "Hi " + username + "! \n Here is your password :" +  password);
+        String emailBody = EmailConstant.RESET_PASSWORD_TEMPLATE.replace("${userName}", user.getFirstName())
+                .replace("${userName}", user.getFirstName())
+                .replace("${changeDate}", new Date().toString())
+                .replace("${supportEmail}", "imsofh@gmail.com")
+                .replace("${supportPhoneNumber}", "+84393459356")
+                .replace("${companyName}", "Nam!");
+        emailService.sendMail(null,user.getEmail(), "Password Notification", emailBody);
         return user;
     }
 
@@ -147,7 +153,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void resetPassword(String email) throws MessagingException, EmailNotFoundException {
+    public void resetPassword(String email) throws EmailNotFoundException {
         User user = userRepository.findUserByEmail(email);
         if (user == null) {
             throw new EmailNotFoundException(NO_USER_FOUND_BY_EMAIL + email);
@@ -219,6 +225,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     private Role getRoleEnumName(String role) {
+        if(role == null) return  Role.valueOf("ROLE_USER");
         return Role.valueOf(role.toUpperCase());
     }
 
