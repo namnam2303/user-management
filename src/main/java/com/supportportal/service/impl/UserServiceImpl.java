@@ -95,13 +95,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setProfileImageUrl(getTemporaryProfileImageUrl(username));
         userRepository.save(user);
         LOGGER.info("New user password: " + password);
-        // String emailBody = EmailConstant.REGISTER_TEMPLATE.replace("${name}", user.getFirstName())
-        //         .replace("${name}", user.getFirstName())
-        //         .replace("${username}", username).replace("${initialPassword}", password)
-        //         .replace("${supportEmail}", "imsofh@gmail.com")
-        //         .replace("${supportPhoneNumber}", "+84393459356")
-        //         .replace("${companyName}", "Nam!");
-        // emailService.sendMail(null,user.getEmail(), "Welcome to my website!", emailBody);
+        String emailBody = EmailConstant.REGISTER_TEMPLATE.replace("${name}", user.getFirstName())
+                .replace("${username}", username).replace("${initialPassword}", password)
+                .replace("${supportEmail}", "imsofh@gmail.com")
+                .replace("${supportPhoneNumber}", "+84393459356")
+                .replace("${companyName}", "Nam!");
+        emailService.sendMail(null,user.getEmail(), "Welcome to my website!", emailBody);
 
         return user;
     }
@@ -162,7 +161,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.save(user);
         LOGGER.info("New user password: " + password);
         String emailBody = EmailConstant.RESET_PASSWORD_TEMPLATE.replace("${name}", user.getFirstName())
-                        .replace("${userName}", user.getFirstName())
                                 .replace("${changeDate}", new Date().toString())
                 .replace("${supportEmail}", "imsofh@gmail.com")
                 .replace("${supportPhoneNumber}", "+84393459356")
