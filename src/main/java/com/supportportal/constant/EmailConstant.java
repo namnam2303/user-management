@@ -15,7 +15,7 @@ public class EmailConstant {
     public static final String SMTP_STARTTLS_ENABLE = "mail.smtp.starttls.enable";
     public static final String SMTP_STARTTLS_REQUIRED = "mail.smtp.starttls.required";
     public static  final String RESET_PASSWORD_TEMPLATE =
-            "Hi ${userName},\n\n" +
+            "Hi ${name},\n\n" +
             "This email is to inform you about a recent change to your account password.\n\n" +
             "Password Change Date: ${changeDate}\n" +
             "Your new password : ${password}\n\n" +
