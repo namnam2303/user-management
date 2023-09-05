@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setProfileImageUrl(getTemporaryProfileImageUrl(username));
         userRepository.save(user);
         LOGGER.info("New user password: " + password);
-        String emailBody = EmailConstant.REGISTER_TEMPLATE.replace("${userName}", user.getFirstName())
+        String emailBody = EmailConstant.REGISTER_TEMPLATE.replace("${name}", user.getFirstName())
                 .replace("${name}", user.getFirstName())
                 .replace("${username}", username).replace("${initialPassword}", password)
                 .replace("${supportEmail}", "imsofh@gmail.com")
