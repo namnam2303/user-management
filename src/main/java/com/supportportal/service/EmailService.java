@@ -19,27 +19,27 @@ public class EmailService {
     private JavaMailSender javaMailSender;
 
     public void sendMail(Multipart file, String to, String subject, String body) {
-//         try {
-//             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
-//             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, file != null);
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, file != null);
 
-//             mimeMessageHelper.setFrom(fromEmail);
-//             mimeMessageHelper.setTo(to);
-//             //mimeMessageHelper.setCc(cc);
-//             mimeMessageHelper.setSubject(subject);
-//             mimeMessageHelper.setText(body);
+            mimeMessageHelper.setFrom(fromEmail);
+            mimeMessageHelper.setTo(to);
+            //mimeMessageHelper.setCc(cc);
+            mimeMessageHelper.setSubject(subject);
+            mimeMessageHelper.setText(body);
 
-// //            for (int i = 0; i < file.length; i++) {
-// //                mimeMessageHelper.addAttachment(
-// //                        file[i].getOriginalFilename(),
-// //                        new ByteArrayResource(file[i].getBytes()));
-// //            }
+//            for (int i = 0; i < file.length; i++) {
+//                mimeMessageHelper.addAttachment(
+//                        file[i].getOriginalFilename(),
+//                        new ByteArrayResource(file[i].getBytes()));
+//            }
 
-//             javaMailSender.send(mimeMessage);
+            javaMailSender.send(mimeMessage);
 
-//         } catch (Exception e) {
-//             throw new RuntimeException(e);
-//         }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
