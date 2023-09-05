@@ -2,6 +2,7 @@ package com.supportportal.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;

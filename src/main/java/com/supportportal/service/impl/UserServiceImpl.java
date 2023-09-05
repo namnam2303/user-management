@@ -126,13 +126,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.save(user);
         saveProfileImage(user, profileImage);
         LOGGER.info("New user password: " + password);
-        String emailBody = EmailConstant.RESET_PASSWORD_TEMPLATE.replace("${userName}", user.getFirstName())
-                .replace("${userName}", user.getFirstName())
-                .replace("${changeDate}", new Date().toString())
+        String emailBody = EmailConstant.REGISTER_TEMPLATE.replace("${userName}", user.getFirstName())
+                .replace("${name}", user.getFirstName())
+                .replace("${username}", username).replace("${initialPassword}", password)
                 .replace("${supportEmail}", "imsofh@gmail.com")
                 .replace("${supportPhoneNumber}", "+84393459356")
                 .replace("${companyName}", "Nam!");
-        emailService.sendMail(null,user.getEmail(), "Password Notification", emailBody);
+        emailService.sendMail(null,user.getEmail(), "Welcome to my website!", emailBody);
         return user;
     }
 
